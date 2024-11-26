@@ -10,7 +10,7 @@ const CourseNavbar: FC = () => {
   const navItems = [
     { title: "Home", path: "/home", icon: "/Home.png" },
     { title: "Program", path: "/program", icon: "/Program.png" },
-    { title: "Test Series", path: "/test-series", icon: "/Test.png" },
+    { title: "Test Series", path: "/test", icon: "/TestSeries.png" }, // Updated path to /test
     { title: "My Cart", path: "/cart", icon: "/Cart.png" },
     { title: "More", path: "#", hasDropdown: true },
   ];
