@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { FC, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface MenuItem {
   title: string;
@@ -11,7 +12,9 @@ interface MenuItem {
 }
 
 const Sidebar: FC = () => {
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const menuItems: MenuItem[] = [
     { title: "My Progress", path: "/progress", icon: "/Vector.png" },
     { title: "Class Schedule", path: "/schedule", icon: "/Class.png" },
@@ -21,7 +24,10 @@ const Sidebar: FC = () => {
     { title: "DSLR", path: "/dslr", icon: "/DSLR.png" },
   ];
 
-  const currentPath = "/test-series";
+  const handleCourseClick = () => {
+    router.push("/course");
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <>
@@ -71,25 +77,41 @@ const Sidebar: FC = () => {
             <ul className="space-y-2">
               {menuItems.map((item) => (
                 <li key={item.title}>
-                  <Link
-                    href={item.path}
-                    className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors
-                      ${
-                        item.path === currentPath
-                          ? "bg-[#FFFFFF1A]"
-                          : "hover:bg-white/10"
-                      }`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <Image
-                      src={item.icon}
-                      alt={item.title}
-                      width={20}
-                      height={20}
-                      className="w-5 h-5"
-                    />
-                    <span>{item.title}</span>
-                  </Link>
+                  {item.title === "My Course" ? (
+                    <button
+                      onClick={handleCourseClick}
+                      className="w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-colors hover:bg-white/10"
+                    >
+                      <Image
+                        src={item.icon}
+                        alt={item.title}
+                        width={20}
+                        height={20}
+                        className="w-5 h-5"
+                      />
+                      <span>{item.title}</span>
+                    </button>
+                  ) : (
+                    <Link
+                      href={item.path}
+                      className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors
+                        ${
+                          item.title === "My Test Series"
+                            ? "bg-[#FFFFFF1A]"
+                            : "hover:bg-white/10"
+                        }`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <Image
+                        src={item.icon}
+                        alt={item.title}
+                        width={20}
+                        height={20}
+                        className="w-5 h-5"
+                      />
+                      <span>{item.title}</span>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -120,7 +142,7 @@ const Sidebar: FC = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <Image
-                    src="/Logout.png"
+                    src="/Log.png"
                     alt="Logout"
                     width={20}
                     height={20}
@@ -135,17 +157,32 @@ const Sidebar: FC = () => {
           <div className="mt-4">
             <Link
               href="/profile"
-              className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-800 transition-colors"
+              className="flex items-center justify-between px-4 py-3 rounded-lg bg-[#FFFFFF1A] transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <Image
-                src="/Profile.png"
-                alt="Profile"
-                width={32}
-                height={32}
-                className="w-8 h-8 rounded-full"
-              />
-              <span>My Profile</span>
+              <div className="flex items-center gap-3">
+                <Image
+                  src="/Profile.png"
+                  alt="Profile"
+                  width={32}
+                  height={32}
+                  className="w-8 h-8 rounded-full"
+                />
+                <span>My Profile</span>
+              </div>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
             </Link>
           </div>
         </div>
