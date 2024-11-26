@@ -24,7 +24,7 @@ const Sidebar: FC = () => {
   ];
 
   const handleCourseClick = () => {
-    router.push("/course");
+    router.push("/my-course");
     setIsMobileMenuOpen(false);
   };
 
