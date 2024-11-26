@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 
 interface MenuItem {
   title: string;
-  path: string;
   icon: string;
 }
 
@@ -16,12 +15,12 @@ const Sidebar: FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const menuItems: MenuItem[] = [
-    { title: "My Progress", path: "/progress", icon: "/Vector.png" },
-    { title: "Class Schedule", path: "/schedule", icon: "/Class.png" },
-    { title: "My Course", path: "/course", icon: "/Course.png" },
-    { title: "My Test Series", path: "/test-series", icon: "/Test.png" },
-    { title: "Short Notes", path: "/notes", icon: "/Short.png" },
-    { title: "DSLR", path: "/dslr", icon: "/DSLR.png" },
+    { title: "My Progress", icon: "/Vector.png" },
+    { title: "Class Schedule", icon: "/Class.png" },
+    { title: "My Course", icon: "/Course.png" },
+    { title: "My Test Series", icon: "/Test.png" },
+    { title: "Short Notes", icon: "/Short.png" },
+    { title: "DSLR", icon: "/DSLR.png" },
   ];
 
   const handleCourseClick = () => {
@@ -93,7 +92,7 @@ const Sidebar: FC = () => {
                     </button>
                   ) : (
                     <Link
-                      href={item.path}
+                      href="/"
                       className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors
                         ${
                           item.title === "My Test Series"
